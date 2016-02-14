@@ -6,7 +6,7 @@
     "__SSL_KEY_PATH__": "/etc/letsencrypt/live/YOURDOMAINHERE/privkey.pem",
     "__WELL_KNOWN_ROOT__": "/var/www/well-known",
 
-    "__OAUTH_CALLBACK_URL__": "https://jupyterhub.YOURDOMAINHERE/hub/oauth_callback",
+    "__OAUTH_CALLBACK_URL__": "https://YOURDOMAINHERE/hub/oauth_callback",
     "__OAUTH_CLIENT_ID__": "YOUR_CLIENT_ID_HERE",
     "__OAUTH_CLIENT_SECRET__": "YOUR_CLIENT_SECRET_HERE",
 

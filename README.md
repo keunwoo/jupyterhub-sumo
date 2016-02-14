@@ -10,7 +10,7 @@ the following features:
 * Cooperates with letsencrypt.org SSL cert serving
 * Use sudospawner to reduce setuid root surface area
 * Easy setup under vagrant for local development
-* Easy setup under a remote VM environment
+* Easy setup under a remote VM environment in Google Compute Engine
 
 In the parlance of our times, this is an "opinionated" stack.
 
@@ -37,7 +37,8 @@ Complete the prompts.
 
 Step 4. Clone and configure jupyterhub-sumo:
 
-    $ git clone https://github.com/keunwoo/jupyterhub-sumo
+    $ cd /opt
+    $ sudo git clone https://github.com/keunwoo/jupyterhub-sumo
     $ cd jupyterhub-sumo
     $ mkdir -p run
     $ cp examples/letsencrypt-config.json run/config.json
@@ -56,6 +57,7 @@ config.json) and add it to the jupyterusers group.
 If your GitHub ID is the same as your VM login name, you can just do
 this:
 
+    $ getent group jupyterusers || sudo groupadd jupyterusers
     $ sudo usermod -a -G jupyterusers `whoami`
 
 TODO(keunwoo): Automate this; can be rolled into provision.sh.
@@ -64,6 +66,7 @@ Step 7. Run nginx and jupyterhub
 
     $ sudo service nginx start
     $ sudo su jupterhub -c 'script /dev/null'
+    $ cd
     $ screen -S jupyterhub jupyterhub
 
 As usual, use `CTRL-a CTRL-d` to detach the screen and `screen -r
