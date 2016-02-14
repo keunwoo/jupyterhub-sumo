@@ -1,5 +1,5 @@
 Cmnd_Alias JUPYTER_CMD = /usr/local/bin/sudospawner
 jupyterhub ALL=(%jupyterusers) NOPASSWD:JUPYTER_CMD
 
-Cmnd_Alias LOCAL_MKUSER_CMD = __ADDUSER_SCRIPT__
+Cmnd_Alias LOCAL_MKUSER_CMD = __JUPYTERHUB_BIN__/adduser-jupyter.sh
 jupyterhub ALL=(ALL) NOPASSWD:LOCAL_MKUSER_CMD

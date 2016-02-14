@@ -21,19 +21,48 @@ In the parlance of our times, this is an "opinionated" stack.
 
 Step 1. Set up a GitHub application.
 
-Step 2. Create a VM with a fresh Ubuntu 15.10 (Wily) install.
+Step 2. Create a VM with an IP address and an appropriate DNS record.
 
-Step 3. ssh into the machine and run the following commands:
+Subsequent steps assume you are ssh'd into the machine.
 
-    $ git clone PATH_TO_REPO
-    $ cd path_to_cloned_repo
+Step 3. Clone and prepare letsencrypt:
+
+    $ cd /opt
+    $ sudo git clone https://github.com/letsencrypt/letsencrypt
+    $ cd letsencrypt
+    $ ./letsencrypt-auto --help
+    $ ./letsencrypt-auto certonly --standalone
+
+Complete the prompts.
+
+Step 4. Clone and configure jupyterhub-sumo:
+
+    $ git clone https://github.com/keunwoo/jupyterhub-sumo
+    $ cd jupyterhub-sumo
     $ mkdir -p run
     $ cp examples/letsencrypt-config.json run/config.json
-    $ sudo ./provision.sh
-    $ sudo service nginx start
 
 Edit run/config.json to taste.
 
+Step 5. Provision the service
+
+    $ sudo ./provision.sh
+
+Step 6. Initialize bootstrap user
+
+Manually create the bootstrap user (`__BOOTSTRAP_USER__` in
+config.json) and add it to the jupyterusers group.
+
+If your GitHub ID is the same as your VM login name, you can just do
+this:
+
+    $ sudo usermod -a -G jupyterusers `whoami`
+
+TODO(keunwoo): Automate this; can be rolled into provision.sh.
+
+Step 7. Run nginx and jupyterhub
+
+    $ sudo service nginx start
     $ sudo su jupterhub -c 'script /dev/null'
     $ screen -S jupyterhub jupyterhub
 
@@ -78,6 +107,7 @@ Step 4. ssh into the box and
 - Consider a real provisioning framework (chef, ansible, ...)
 - Containerize and make a Docker image
 - Start nginx system service persistently by default
+- Automatically set up letsencrypt auto-renewal
 - Setup jupyterhub as a system service instead of running the script
   under screen as su jupyterhub
 - Linkify these docs

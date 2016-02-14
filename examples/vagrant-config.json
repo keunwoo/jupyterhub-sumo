@@ -1,5 +1,5 @@
 {
-    "__ADDUSER_SCRIPT__": "/vagrant/bin/adduser-jupyter.sh",
+    "__JUPYTERHUB_BIN__": "/vagrant/bin",
 
     "__SERVER_NAME__": "vagrant-wily.localhost",
     "__SSL_CERT_PATH__": "/vagrant/run/cert.pem",

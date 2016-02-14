@@ -1,4 +1,5 @@
 local_config = {
+    'jupyterhub_bin': '__JUPYTERHUB_BIN__',
     'oauth_callback_url': '__OAUTH_CALLBACK_URL__',
     'oauth_client_id': '__OAUTH_CLIENT_ID__',
     'oauth_client_secret': '__OAUTH_CLIENT_SECRET__',
@@ -22,4 +23,7 @@ c.SudoSpawner.debug_mediator = True
 # implied by the mkuser script below.
 c.LocalAuthenticator.create_system_users = True
 c.LocalAuthenticator.group_whitelist = ['jupyterusers']
-c.LocalAuthenticator.add_user_cmd = ['sudo', '/vagrant/bin/adduser-jupyter.sh']
+c.LocalAuthenticator.add_user_cmd = [
+    'sudo',
+    local_config['jupyterhub_bin'] + '/adduser-jupyter.sh',
+]
